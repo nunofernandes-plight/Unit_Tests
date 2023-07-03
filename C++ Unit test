@@ -1,0 +1,57 @@
+Certainly! Here's an example of a unit test written in C++ using the Google Test framework:
+
+```cpp
+#include <gtest/gtest.h>
+
+// The function to be tested
+int Add(int a, int b) {
+    return a + b;
+}
+
+// The test fixture class
+class AddTest : public ::testing::Test {
+protected:
+    void SetUp() override {
+        // Set up any resources required by the tests
+    }
+
+    void TearDown() override {
+        // Clean up any resources allocated in SetUp()
+    }
+};
+
+// A test case within the fixture
+TEST_F(AddTest, PositiveNumbers) {
+    // Test with positive numbers
+    int result = Add(2, 3);
+    ASSERT_EQ(result, 5);
+}
+
+TEST_F(AddTest, NegativeNumbers) {
+    // Test with negative numbers
+    int result = Add(-2, -3);
+    ASSERT_EQ(result, -5);
+}
+
+TEST_F(AddTest, ZeroNumbers) {
+    // Test with zero values
+    int result = Add(0, 0);
+    ASSERT_EQ(result, 0);
+}
+
+// The main function to run all tests
+int main(int argc, char** argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}
+```
+
+In this example, we have a function `Add()` that simply adds two integers. We then create a test fixture `AddTest` derived from `::testing::Test` to group related tests and manage test setup and teardown.
+
+Inside the test fixture, we define individual test cases using the `TEST_F` macro. Each test case verifies a specific behavior of the `Add()` function. In this example, we test with positive numbers, negative numbers, and zero values.
+
+We use assertions like `ASSERT_EQ` to check if the actual result matches the expected result. If an assertion fails, it indicates a test failure.
+
+Finally, the `main()` function initializes the test framework with `::testing::InitGoogleTest` and runs all the tests using `RUN_ALL_TESTS()`.
+
+To compile and run this test, you'll need to install the Google Test framework and link it with your test file during the compilation process. Make sure to follow the instructions provided by the Google Test framework documentation for installation and linking.
